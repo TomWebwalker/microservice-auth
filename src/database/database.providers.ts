@@ -14,5 +14,6 @@ export const databaseProvider: FactoryProvider = {
       database: process.env.DB_DATABASE || 'project-db',
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
       synchronize: true,
+      migrations: [__dirname + '/../migrations/*{.ts,.js}']
     }),
 };
