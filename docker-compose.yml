@@ -1,46 +1,20 @@
 version: '3.3'
 
-services:         
-
-
-
-    microservice-auth:
-        build: 
-            context: .
-            dockerfile: Dockerfile
-        restart: always
-        environment:
-            NODE_ENV: ${NODE_ENV}
-            NODE_PORT: 3001
-            DB_DATABASE: ${DB_DATABASE}
-            DB_USER: ${DB_USER}
-            DB_PASSWORD: ${DB_PASSWORD}
-            DB_HOST: ${DB_HOST}
-        ports: 
-            - '3001:3001'
-        expose: 
-            - '3001'
-        depends_on: 
-            - redis
-            - db
-
-    db:
-        image: mysql:5.7
-        restart: always
-        environment: 
-            MYSQL_DATABASE: 'project-db'
-            MYSQL_USER: 'user'
-            MYSQL_PASSWORD: 'microservice-pass'
-            MYSQL_ROOT_PASSWORD: 'microservice-pass'   
-        ports: 
-            - '3306'
-        expose: 
-            - '3306'
-        volumes: 
-            - my-db:/var/lib/mysql            
-
-    redis:
-        image: "redis:alpine"
-    
-volumes:
-    my-db:
+services:
+  microservice-auth:
+    network_mode: "host"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      NODE_PORT: 3001
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+    ports:
+      - '3001:3001'
+    expose:
+      - '3001'
