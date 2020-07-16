@@ -1,4 +1,4 @@
-import { DATABASE_CONNECTION } from './../../constants';
+import { DATABASE_CONNECTION } from '@constants';
 import { FactoryProvider } from '@nestjs/common';
 import { createConnection } from 'typeorm';
 
@@ -14,6 +14,6 @@ export const databaseProvider: FactoryProvider = {
       database: process.env.DB_DATABASE || 'project-db',
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
       synchronize: true,
-      migrations: [__dirname + '/../migrations/*{.ts,.js}']
+      migrations: [__dirname + '/../migrations/*{.ts,.js}'],
     }),
 };

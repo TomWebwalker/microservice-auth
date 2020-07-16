@@ -1,8 +1,10 @@
-import { USER_REPOSITORY } from './../../constants';
+import { User } from './user.model';
+import { USER_REPOSITORY } from '@constants';
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { UserList } from './user-list.object-type';
+import { RegisterInput } from '../auth/inputs/register.input';
 
 @Injectable()
 export class UserService {
@@ -12,7 +14,12 @@ export class UserService {
   ) {}
 
   async findAll(): Promise<UserList> {
-    return this.userRepository.findAndCount().then(([rows, count]) => ({ rows, count }));
+    return this.userRepository
+      .findAndCount()
+      .then(([rows, count]) => ({ rows, count }));
+  }
+
+  async create(user: RegisterInput): Promise<User> {
+    return this.userRepository.save(user);
   }
 }
-  

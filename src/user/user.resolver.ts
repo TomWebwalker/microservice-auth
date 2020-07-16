@@ -1,9 +1,9 @@
 import { Query, Resolver } from '@nestjs/graphql';
 import { UserList } from './user-list.object-type';
-import { UserModel } from './user.model';
+import { User } from './user.model';
 import { UserService } from './user.service';
 
-@Resolver(of => UserModel)
+@Resolver(of => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
