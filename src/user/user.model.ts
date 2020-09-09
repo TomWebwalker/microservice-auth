@@ -2,7 +2,8 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { UserEntity } from './user.entity';
 
 @ObjectType()
-export class User implements UserEntity {
+export class User extends UserEntity {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Field(type => Int)
   id: number;
 

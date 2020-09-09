@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { UserList } from './user-list.object-type';
 import { RegisterInput } from '../auth/inputs/register.input';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -20,6 +21,8 @@ export class UserService {
   }
 
   async create(user: RegisterInput): Promise<User> {
-    return this.userRepository.save(user);
+    const salt = bcrypt.genSaltSync(10);
+    const password = bcrypt.hashSync(user.password, salt);
+    return this.userRepository.save({...user, password});
   }
 }
